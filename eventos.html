@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuenta regresiva</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"> <!-- Cargando Poppins en negrita -->
+    <style>
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif; /* Usando Poppins */
+            text-align: center;
+            padding-top: 50px; /* Ajustado para más espacio arriba */
+            margin: 0;
+        }
+        #countdown {
+            font-size: 50px;
+            margin-top: 20px; /* Espaciado entre el texto y la cuenta regresiva */
+        }
+        .time {
+            display: inline-block;
+            margin: 0 10px;
+            text-align: center;
+            width: 100px; /* Ancho fijo para que sean cuadradas */
+            height: 100px; /* Alto fijo para que sean cuadradas */
+            background-color: #02d609; /* Color verde para la caja */
+            color: #000000; /* Color negro para los números */
+            border-radius: 5px; /* Bordes ligeramente redondeados */
+            line-height: 100px; /* Centrar verticalmente el número */
+            font-size: 60px; /* Tamaño del número */
+            font-weight: 900; /* Peso de la fuente en negrita */
+        }
+        .label {
+            display: block;
+            font-size: 20px;
+            color: #ffffff; /* Color blanco para las palabras */
+            margin-top: -20px; /* Espaciado entre el número y la etiqueta */
+        }
+        .separator {
+            display: inline-block;
+            font-size: 50px;
+            color: #ffffff; /* Color blanco para el separador */
+            vertical-align: top; /* Alinear los separadores al top */
+        }
+        .heading {
+            font-size: 24px; /* Tamaño reducido para el encabezado */
+            font-weight: 600; /* Semi-bold */
+            margin-bottom: 10px; /* Espaciado entre encabezados */
+        }
+        .main-title {
+            font-size: 70px; /* Tamaño para el título principal */
+            font-weight: bold; /* Negrita */
+        }
+        .main-title span {
+            color: #02d609; /* Color verde para "Friday" */
+        }
+        .image-container {
+            margin-top: 40px; /* Espaciado entre la cuenta regresiva y la imagen */
+        }
+        .image-container img {
+            width: 33.33%; /* Tercio del tamaño de la pantalla */
+            max-width: 400px; /* Máximo ancho para no exceder en pantallas pequeñas */
+            height: auto; /* Mantener la relación de aspecto */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="heading">Llega el auténtico</div>
+    <div class="main-title">Black <span>Friday</span></div>
+
+    <div id="countdown">
+        <div class="time">
+            <span id="days">00</span>
+            <div class="label">Días</div>
+        </div>
+        <span class="separator">:</span>
+        <div class="time">
+            <span id="hours">00</span>
+            <div class="label">Horas</div>
+        </div>
+        <span class="separator">:</span>
+        <div class="time">
+            <span id="minutes">00</span>
+            <div class="label">Minutos</div>
+        </div>
+        <span class="separator">:</span>
+        <div class="time">
+            <span id="seconds">00</span>
+            <div class="label">Segundos</div>
+        </div>
+    </div>
+
+    <div class="image-container">
+        <img src="logo-web_nuevo.png" alt="Descripción de la imagen">
+    </div>
+
+    <script>
+        // Fecha y hora del evento (31/10/2024 a las 08:00)
+        var eventDate = new Date("Oct 31, 2024 08:00:00").getTime();
+
+        // Actualizar la cuenta regresiva cada 1 segundo
+        var countdown = setInterval(function() {
+
+            // Obtener la fecha y hora actual
+            var now = new Date().getTime();
+
+            // Calcular la diferencia entre la fecha del evento y la fecha actual
+            var distance = eventDate - now;
+
+            // Calcular días, horas, minutos y segundos
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Formatear números a dos dígitos
+            document.getElementById("days").innerHTML = String(days).padStart(2, '0');
+            document.getElementById("hours").innerHTML = String(hours).padStart(2, '0');
+            document.getElementById("minutes").innerHTML = String(minutes).padStart(2, '0');
+            document.getElementById("seconds").innerHTML = String(seconds).padStart(2, '0');
+
+            // Si la cuenta regresiva ha terminado, mostrar un mensaje
+            if (distance < 0) {
+                clearInterval(countdown);
+                document.getElementById("countdown").innerHTML = "¡Evento Comenzado!";
+            }
+        }, 1000);
+    </script>
+
+</body>
+</html>
